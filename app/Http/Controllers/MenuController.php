@@ -14,7 +14,8 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menusData=Menu::select(['id','parent_id','menu_name','sorting'])->get();
+        $menusData = Menu::select(['id', 'parent_id', 'menu_name', 'sorting'])->get()->keyBy('id')->toArray();
+        $menusData = Menu::formatMenu($menusData);
         return response()->json($menusData);
     }
 
